@@ -9,7 +9,7 @@ metadata:
 spec:
   title: "Vercel's Next.js Enterprise Boilerplate on Cloudflare Workers"
   summary: "Vercel's Next.js Enterprise Boilerplate (Blazity's next-enterprise) — a Next.js 15 landing page and health route with Tailwind CSS 4, strict TypeScript, Radix UI and CVA components, t3-env, Vitest, Playwright and Storybook — runs on Cloudflare Workers + Static Assets through @opennextjs/cloudflare inside the Cirrus baseline's repository conventions, its tests and stories kept and run against the built Worker, and becomes an Orun baseline that takes a new site from nothing to live on stage and prod in one landing."
-  state: started
+  state: completed
   milestones:
     - name: "EB0 — the spec"
       exitCriteria:

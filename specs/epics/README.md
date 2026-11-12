@@ -7,6 +7,6 @@ folder is the adoption; the merge creates the epic in the workspace.
 
 | Epic | Cluster | Status | What it is |
 |------|---------|--------|------------|
-| [`next-enterprise/`](./next-enterprise/) | **EB** | In progress (EB1: the site on Workers) | Vercel's Next.js Enterprise Boilerplate (Blazity's next-enterprise), its page, health route, components, stories and tests kept, on Next.js 15.5 in one Cloudflare Worker with Static Assets via OpenNext — and an Orun baseline that instantiates it in one landing (EB2) |
+| [`next-enterprise/`](./next-enterprise/) | **EB** | ✅ Shipped (`baseline-v1`); live bootstrap pending | Vercel's Next.js Enterprise Boilerplate (Blazity's next-enterprise), its page, health route, components, stories and tests kept, on Next.js 15.5 in one Cloudflare Worker with Static Assets via OpenNext — and an Orun baseline that instantiates it in one landing (EB2) |
 
 As-built ≠ intent: what shipped lives in each epic's `IMPLEMENTATION-STATUS.md`.

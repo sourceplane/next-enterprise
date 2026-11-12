@@ -5,16 +5,53 @@ Vercel's [Next.js Enterprise Boilerplate](https://github.com/Blazity/next-enterp
 TypeScript with `ts-reset`, Radix UI and CVA components, `t3-env`,
 Kubernetes-style health checks, Vitest with React Testing Library, Playwright
 and Storybook — running on **Cloudflare Workers + Static Assets** through
-[`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare), deployed by
-[Orun](https://github.com/sourceplane/orun) to stage and prod on every merge.
-Packaging it as an Orun baseline is the next milestone (EB2).
+[`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare), and packaged
+as an **Orun baseline**: one command takes a new site from nothing to live on
+stage and prod, in its own repository, under its own name.
 
 The template's code is the code. What the port adds is the Workers build, the
 monorepo wrapper, a test package, and the deploy contract; what it swaps is
 `@vercel/otel` (for Workers Observability), the template's GitHub workflows
 (for Orun's CI) and the hard-coded `vercel.app` origin (for an environment
-variable). See [`specs/epics/next-enterprise`](specs/epics/next-enterprise/README.md)
+variable). What the baseline adds is everything needed to make a copy of it
+somebody else's — built the way [cirrus-baseline](https://github.com/sourceplane/cirrus-baseline)
+is. See [`specs/epics/next-enterprise`](specs/epics/next-enterprise/README.md)
 for the design, the milestones and the as-built status.
+
+## Instantiating a site
+
+```bash
+git clone --depth 1 --branch <baseline-tag> https://github.com/sourceplane/next-enterprise
+cd next-enterprise
+orun new --blueprint repo-blueprint.yaml --out ~/sites/acme-app --run-hooks --resume \
+  --set reponame=acme-app --set productname="Acme App" \
+  --set githuborg=acme-inc --set subdomain=<workers-dev-subdomain>
+```
+
+Or, once the platform's registry lists it, from the Orun console (Baselines →
+`next-enterprise` → Build). Two phases — `01-product` (the repository
+created, then the whole site in one pull request, deployed to stage and prod
+and smoke-tested) and `03-docs` (the live deployment recorded) — each landing
+one pull request in the new repository.
+**[BOOTSTRAP.md](BOOTSTRAP.md)** is the operator guide;
+[docs/phases/](docs/phases/README.md) has a page per phase.
+
+The new repository receives the **site only** — the app, its tests and
+stories, its CI, its tooling, a README and an `AGENTS.md` of its own and its
+operating contract — renamed throughout to the site's name, repository and
+Cloudflare Worker. None of this repository's machinery ships.
+
+| What makes it a baseline | Where |
+|---|---|
+| The console card (inputs, secrets, programme) | `blueprint.yaml` |
+| The build document (modules, phases, hooks) | `repo-blueprint.yaml` |
+| This tree's identity, and the bootstrap's task contracts | `.baseline/` |
+| The rename engine | `tooling/rebrand/rebrand.mjs` |
+| The bootstrap's helpers (deferrals, redeploy marker, work-tree strip) | `tooling/bootstrap/` |
+| The deployment-record renderer | `hooks/render-deployment-docs.sh` |
+| The site's README, agent page and context pack | `.baseline/product/README.md`, `.baseline/product/AGENTS.md`, `ai/context/` |
+| The baseline's tests: contract, leak, offline bootstrap, end to end | `testing/`, `.github/workflows/baseline.yml` |
+| Cutting a `baseline-vN` tag | `.github/workflows/tag.yml` |
 
 ## What is here (the site)
 
@@ -73,6 +110,8 @@ Two optional build-time variables (`apps/web/.env.example`), both declared in
 | Workflow | What it runs | Ships to a site |
 |---|---|---|
 | `ci.yml` | the Orun pipeline, and the only workflow a site carries: `orun plan --changed`, then one job per lane. A pull request runs the verify lanes (the site built and dry-deployed per environment; the tests' `quick-check` lane installs and checks the package, it does not run them), except the bootstrap's own landings (`orun/BASE-*`), where `plan` alone is the check; a merge deploys stage → prod. It plans nothing while `intent.yaml` names the placeholder workspace `ws_CHANGE_ME`, as this repository does. A manual run (Orunbase's Deploy button, or Run workflow on `main`) plans the environment and components it names under the push-to-main trigger, so they deploy as a merge deploys them | yes |
+| `baseline.yml` | the baseline's own tiers: contract tests, the blueprint read by the pinned orun, the leak gate, the offline bootstrap, the site built, dry-deployed and served, and the template's Playwright suite and Storybook test runner against it | no |
+| `tag.yml` | cuts a `baseline-vN` tag (manual) | no |
 
 The template is MIT-licensed (© 2023 Blazity); its licence ships as
 `apps/web/LICENSE`.

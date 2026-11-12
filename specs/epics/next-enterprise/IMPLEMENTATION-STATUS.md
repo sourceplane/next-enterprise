@@ -4,7 +4,7 @@
 |---|---|---|
 | EB0 — the spec | ✅ | EB-1 |
 | EB1 — the site on Workers | ✅ | EB-2 |
-| EB2 — a baseline | planned | EB-3 |
+| EB2 — a baseline | ✅ | EB-3, tagged `baseline-v1` |
 
 ## Departures from the upstream template
 

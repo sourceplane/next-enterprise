@@ -16,7 +16,7 @@ site in one landing.**
 
 | | |
 |---|---|
-| Status | In progress — EB1 on main: the site runs on Workers |
+| Status | ✅ Shipped (`baseline-v1`) — proven offline in Baseline CI; not yet live (risk EB-A) |
 | Upstream | [Blazity/next-enterprise](https://github.com/Blazity/next-enterprise) (MIT), at `97c4f3e` (2026-05-18, "chore: bump next 15.5.18") — Vercel's [Next.js Enterprise Boilerplate](https://vercel.com/templates/next.js/nextjs-enterprise-boilerplate) template |
 | Reference | [portfolio-starter-kit](https://github.com/sourceplane/portfolio-starter-kit) — Next.js on OpenNext with no infrastructure, its scaffolding, tests and bootstrap |
 | Key | `EB` |
