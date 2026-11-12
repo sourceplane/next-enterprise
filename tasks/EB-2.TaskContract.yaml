@@ -1,0 +1,22 @@
+apiVersion: orun.io/v1
+kind: TaskContract
+metadata:
+  name: EB-2
+  title: "The site on Workers"
+spec:
+  goal: Vercel's Next.js Enterprise Boilerplate runs on Cloudflare Workers + Static Assets through @opennextjs/cloudflare, on the template's Next.js 15.5 line, its page, health route, components, stories and tests kept, with our tests beside them and its README saying how it maps to Vercel
+  affects:
+    - apps/web
+    - tests/web
+    - .github/renovate.json
+    - pnpm-lock.yaml
+    - pnpm-workspace.yaml
+    - turbo.json
+    - .gitignore
+    - .vscode/settings.json
+    - README.md
+  doneWhen:
+    - pnpm typecheck, lint (with Prettier's check), test and build are green
+    - wrangler dev answers the page, the health check on all five of its addresses and 404s for a missing page or chunk
+    - the template's Playwright suite passes against the Worker in chromium, firefox and webkit, and Storybook's test runner against the built Storybook
+  gates: []

@@ -1,0 +1,30 @@
+# The epic's declaration. metadata.name equals the directory name; metadata.key
+# is the task-key prefix this epic reserves (EB → EB-1, EB-2, …). Owner, target
+# date and health are the platform's — never written here.
+apiVersion: orun.io/v1
+kind: Epic
+metadata:
+  name: next-enterprise
+  key: EB
+spec:
+  title: "Vercel's Next.js Enterprise Boilerplate on Cloudflare Workers"
+  summary: "Vercel's Next.js Enterprise Boilerplate (Blazity's next-enterprise) — a Next.js 15 landing page and health route with Tailwind CSS 4, strict TypeScript, Radix UI and CVA components, t3-env, Vitest, Playwright and Storybook — runs on Cloudflare Workers + Static Assets through @opennextjs/cloudflare inside the Cirrus baseline's repository conventions, its tests and stories kept and run against the built Worker, and becomes an Orun baseline that takes a new site from nothing to live on stage and prod in one landing."
+  state: started
+  milestones:
+    - name: "EB0 — the spec"
+      exitCriteria:
+        - "the repository is born with its intent, CI, tooling and spec index, and this doc set and the task contracts are on main"
+      tasks: [EB-1]
+    - name: "EB1 — the site on Workers"
+      exitCriteria:
+        - "apps/web is the upstream template on Next.js 15.5, built by `next build` + `opennextjs-cloudflare build`, its page titled and headed by one name seam and its Open Graph card on the environment's origin"
+        - "`pnpm typecheck`, `pnpm lint` (next lint and Prettier's check), `pnpm test` (the template's Vitest suite and tests/web) and `pnpm build` are green"
+        - "`wrangler dev` serves the page, the health check on all five of its addresses and 404s for a missing page or chunk; the template's Playwright suite passes against it in chromium, firefox and webkit, and Storybook's test runner against the built Storybook"
+        - "the README says how to run, test and deploy it, and how every Vercel piece maps to Cloudflare"
+      tasks: [EB-2]
+    - name: "EB2 — a baseline"
+      exitCriteria:
+        - "blueprint.yaml (the console card) and repo-blueprint.yaml (the build) take a new site from nothing to live on stage and prod in one landing, then record it"
+        - "a site built from it carries the site only, renamed throughout to its own name, repository and Worker, with Blazity's licence and credit intact"
+        - "Baseline CI is green: contract tests, generated component docs, the blueprint read by the pinned orun, the leak gate, the offline bootstrap and the end-to-end tier — the stage lane's steps in a staged job tree, the Worker smoke-tested and every route read, and the template's browser tests run against it"
+      tasks: [EB-3]
