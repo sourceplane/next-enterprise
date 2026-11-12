@@ -1,0 +1,36 @@
+{
+  "extends": "../../tooling/tsconfig/web.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": [
+      "node",
+      "@testing-library/jest-dom"
+    ],
+    "paths": {
+      "app/*": [
+        "../../apps/web/app/*"
+      ],
+      "components/*": [
+        "../../apps/web/components/*"
+      ],
+      "lp-items": [
+        "../../apps/web/lp-items.tsx"
+      ],
+      "env.mjs": [
+        "../../apps/web/env.mjs"
+      ]
+    },
+    "strict": false,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noUncheckedIndexedAccess": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}

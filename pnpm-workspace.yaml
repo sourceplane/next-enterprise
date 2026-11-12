@@ -11,3 +11,7 @@ onlyBuiltDependencies:
   - workerd
   - sharp
 
+# The template's npm `overrides` (its package.json `pnpm.overrides`), kept as
+# it ships them: a patched `tmp` for its dev tools.
+overrides:
+  "tmp@<=0.2.3": ">=0.2.4"
